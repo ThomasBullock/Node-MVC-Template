@@ -1,0 +1,30 @@
+include mixins/_off-canvas
+include mixins/_parallax
+include mixins/_accordion-tabs
+
+doctype html
+html
+	head
+		title=`${title} | ${h.siteName}`
+		link(rel='stylesheet', href='/dist/style.css')
+		meta(name="viewport" content="width=device-width, initial-scale=1")
+	body
+		block header
+			+off-canvas
+			+accordion-tabs
+			+parallax
+		block messages
+			if locals.flashes
+				.inner
+					.flash-messages
+						- const categories = Object.keys(locals.flashes)
+						each category in categories
+							each message in flashes[category]
+								.flash(class=`flash--${category}`)
+									p.flash__text!= message
+									button.flash__remove(onClick="this.parentElement.remove()") &times;			
+		block content
+		p 
+			!= h.moment("20111031", "YYYYMMDD").fromNow()
+	block scripts
+		script(src="/dist/App.bundle.js")

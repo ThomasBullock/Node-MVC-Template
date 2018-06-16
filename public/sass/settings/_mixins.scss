@@ -1,0 +1,47 @@
+  /* ================================= 
+    B.E.M.
+  ==================================== */  
+
+@mixin elem($element) {
+	
+	&__#{$element} {
+		@content;	
+	}
+	
+}
+
+@mixin mod($modifier) {
+	
+	&--#{$modifier} {
+		@content;	
+	}
+	
+}
+
+
+  /* ================================= 
+    UTILITIES
+  ==================================== */  
+
+@mixin img-responsive() {
+	max-width: 100%;
+	height: auto;
+	display:block;
+}
+
+
+@function set-font-color($color) {
+	@if(lightness($color) > 70) {
+		@return $oil;
+	} @else {
+		@return $smoke;
+	}
+} 
+
+@mixin center($vertical: 50%) {
+	text-align: center;
+    position: absolute;
+    left: 50%;
+    top: $vertical;
+    transform: translate(-50%, -50%);	
+}
